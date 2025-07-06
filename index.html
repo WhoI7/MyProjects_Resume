@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Мої проєкти</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f7f9fc;
+      margin: 0;
+      padding: 40px 20px;
+      color: #333;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .header-title {
+      text-align: center;
+      color: #0057b8;
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+    p {
+        text-align: justify;
+    }
+
+    .header-subtitle {
+      text-align: center;
+      color: #666;
+      font-size: 1.2rem;
+      margin-bottom: 40px;
+    }
+    
+    .block {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      padding: 30px 40px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .block h2 {
+      margin-top: 0;
+      margin-bottom: 15px;
+      color: #0057b8;
+      font-weight: 700;
+      font-size: 1.8rem;
+      border-left: 6px solid #0057b8;
+      padding-left: 12px;
+    }
+
+    .block p {
+      font-size: 1.05rem;
+      line-height: 1.6;
+      margin-bottom: 15px;
+      color: #444;
+    }
+
+    .block ul {
+      padding-left: 20px;
+      margin-bottom: 20px;
+      color: #444;
+      font-size: 1rem;
+    }
+
+    .block ul li {
+      margin-bottom: 8px;
+    }
+
+    .video-box {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      margin-bottom: 15px;
+    }
+
+    .video-box video,
+    .video-box iframe {
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+      width: 280px;
+      max-width: 100%;
+      height: 160px;
+      object-fit: cover;
+      background: black;
+    }
+
+    .tags-title {
+      font-weight: 600;
+      color: #333;
+      margin-top: 15px;
+      margin-bottom: 8px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .tag {
+      background: #e0f0ff;
+      color: #0057b8;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      white-space: nowrap;
+      transition: background 0.3s;
+    }
+
+    .tag:hover {
+      background: #cce4ff;
+    }
+
+    @media (max-width: 600px) {
+      .video-box {
+        flex-direction: column;
+      }
+      .video-box video,
+      .video-box iframe {
+        width: 100%;
+        height: auto;
+      }
+    }
+    .thumbnails {
+      display: flex;
+      overflow-x: auto;
+      gap: 10px;
+      padding: 10px;
+      background: #f0f0f0;
+    }
+
+    .thumbnails img {
+      height: 100px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .thumbnails img:hover {
+      transform: scale(1.05);
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.85);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+      z-index: 1000;
+    }
+
+    .overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .photo-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .photo-container img {
+      max-height: 80vh;
+      max-width: 90vw;
+      border-radius: 8px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.7);
+    }
+
+    .arrow {
+      font-size: 40px;
+      color: white;
+      cursor: pointer;
+      user-select: none;
+      transition: color 0.2s;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .arrow:hover { color: #ffcc00; }
+    .arrow.left  { left: -60px; }
+    .arrow.right { right: -60px; }
+
+    .close-btn {
+      font-size: 40px;
+      color: white;
+      cursor: pointer;
+      user-select: none;
+      transition: color 0.2s;
+      position: fixed;
+      top: 20px;
+      right: 30px;
+      z-index: 1100;
+    }
+
+    .close-btn:hover { color: #ff4444; }
+    video {
+      border-radius: 20px;
+      width: 640px;
+      height: auto;
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1 class="header-title">Мої проєкти</h1>
+        <!--///////////////////BadBetAlert_TG_Bot///////////////////////-->
+
+        <section class="block">
+            <h2>Telegram-бот для ознайомлення з ризиками азартних ігор</h2>
+
+            <a href="https://github.com/WhoI7/BadBetAlert_TG_Bot" class="project-link" target="_blank">BadBetAlert_TG_Bot на GitHub</a>
+            <p><strong> ↑ ↑ ↑ тут можна завантажити повний вихідний код проєкту</strong></p>
+
+            <p>
+                Цей проєкт починався як простий Telegram-бот для популярної карткової гри "Блекджек" та для ознайомлення з роботою Telegram API,
+                а також із базою даних MySQL і асинхронною роботою. Бот був написаний на C# із використанням офіційної бібліотеки Telegram.Bot.
+            </p>
+            <p>
+                Згодом виникла можливість доопрацювати його і перетворити на курсовий проєкт на 4 курсі.
+                Це став мій найбільший проєкт не тільки в плані написання коду та вивчення нових технологій
+                (MySQL, різні HTTP-бібліотеки, робота з асинхронністю), але й у плані збору та аналізу матеріалів по тематиці проєкту — казино,
+                їхні уловки, різновиди ігор, правила та багато іншого, що стосується індустрії азартних ігор.
+            </p>
+
+            <div class="tags-title">Було реалізовано:</div>
+            <ul>
+                <li>Вступний запит на прийняття політики обробки інформації</li>
+                <li>
+                    Три розділи з розподіленою інформацією:
+                    <ul>
+                        <li>Про казино</li>
+                        <li>Про різновиди ігор у казино</li>
+                        <li>Про фішки та методи, які використовують казино для утримання гравців</li>
+                    </ul>
+                </li>
+                <li>Інтуїтивно зрозумілий інтерфейс за допомогою вбудованих Telegram-кнопок</li>
+                <li>Коротка реєстрація профілю зі створенням унікального нікнейму за заданими параметрами</li>
+                <li>Інформаційно оформлений профіль користувача</li>
+                <li>4 робочих гри (максимально наближені до реальності в рамках Telegram)</li>
+                <li>Демо-рахунок у вигляді фішок різного номіналу: 1, 5, 25, 50, 100, 500, 1000</li>
+                <li>Можливість комбінувати фішки різного номіналу для створення будь-якої ставки(у деяких іграх!)</li>
+                <li>Обмін фішок на еквівалентну суму іншого номіналу</li>
+                <li>Рейтинг гравців із найбільшим демо-рахунком</li>
+                <li>Зміна ігрового ніка</li>
+                <li>Видалення профілю з бази даних</li>
+            </ul>
+
+            <iframe class="video-box" width="640" height="360"
+                    src="https://www.youtube.com/embed/zhc9DnCPh8I"
+                    frameborder="0"
+                    allowfullscreen>
+            </iframe>
+            <div class="thumbnails">
+                <img src="BadBetAlert_TG_Bot/1.png" alt="Фото 1">
+                <img src="BadBetAlert_TG_Bot/2.png" alt="Фото 2">
+                <img src="BadBetAlert_TG_Bot/3.png" alt="Фото 3">
+                <img src="BadBetAlert_TG_Bot/4.png" alt="Фото 4">
+                <img src="BadBetAlert_TG_Bot/5.png" alt="Фото 5">
+                <img src="BadBetAlert_TG_Bot/6.png" alt="Фото 6">
+                <img src="BadBetAlert_TG_Bot/7.png" alt="Фото 7">
+            </div>
+
+            <div class="tags-title">Використані технології та ресурси:</div>
+            <div class="tags">
+                <div class="tags">
+                    <div class="tag">MS visual studio</div>
+                    <div class="tag">MySQL (у фінальній версії)</div>
+                    <div class="tag">MS Access (у початковій версії)</div>
+                    <div class="tag">Telegram API</div>
+                    <div class="tag">Офіційна бібліотека Telegram.Bot для C#</div>
+                    <div class="tag">Офіційна документація Telegram API та бібліотеки</div>
+                    <div class="tag">Чат GPT як довідник по бібліотеках (хоч і не завжди точний)</div>
+                    <div class="tag">Асинхронне програмування</div>
+                    <div class="tag">Примітивне логування у консоль</div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!--///////////////////Android-піксельна гра на Unity///////////////////////-->
+
+        <section class="block">
+            <h2>Android-піксельна гра на Unity</h2>
+
+            <a href="https://github.com/WhoI7/LittleStory_Unity_Android_Game" class="project-link" target="_blank">LittleStory_Unity_Android_Game на GitHub</a>
+            <p><strong> ↑ ↑ ↑ тут можна завантажити APK</strong></p>
+
+            <p>
+                Ця гра створювалася на 4 курсі під час зимових канікул для ознайомлення та саморозвитку
+                у створенні ігор, а також для практики роботи з Unity. Паралельно також ознайомлювався з основами малювання піксель-артів та загальними принципами створення 2D-графіки.
+            </p>
+            <p>
+                Історія полягає в тому, що вчені, знайшовши кристал із дивною живою активністю,
+                почали ставити на ньому досліди та проводити різні лабораторні експерименти.
+                Але з кожним днем кристал ставав дедалі активнішим і непередбачуванішим.
+                Тому за наказом правління вчені були змушені припинити досліди й знищити кристал.
+            </p>
+            <p>
+                Однак усе виявилося не так просто: кристал, відчувши для себе небезпеку,
+                почав захищати головний комп'ютер, тягнучи енергію з чотирьох енергоблоків,
+                розташованих неподалік. Через халатність проєктувальників не було передбачено
+                аварійного відключення цих блоків. Щоб назавжди покінчити з кристалом, потрібно було
+                спершу вимкнути всі енергоблоки в консолі головного комп'ютера, а потім знищити сам комп'ютер.
+                Після втрати життєвих сил кристал остаточно перетворився б на копалину.
+            </p>
+            <p>
+                Вам, як старому роботу давньої моделі, доведеться вистояти та захистити
+                головний комп'ютер від трьох хвиль слаймів, які атакують з різних сторін.
+                Лише вистоявши ці атаки, ви зможете дочекатися повного відключення живлення
+                для кристала й завершити свою місію.
+            </p>
+            <p>
+                Для створення спрайту кристалу та деяких інших елементів оформлення й тематики
+                я надихнувся грою <strong>Starbound</strong> та босом <strong>Erchius Horror</strong>.
+            </p>
+            <div class="tags-title">Було реалізовано:</div>
+            <ul>
+                <li>Головний екран та екран проіграшу</li>
+                <li>Переміщення за допомогою екранного джойстика</li>
+                <li>Постріли лазерами з очей робота</li>
+                <li>Можливість польоту</li>
+                <li>Ворог-слизень, який стрибає та стріляє/плюється хвилями слизу</li>
+                <li>Спливаючий текст, який веде гравця по грі</li>
+            </ul>
+
+            <div class="thumbnails">
+                <img src="LittleStory_Unity_Android_Game/1.jpg" alt="Фото 1">
+                <img src="LittleStory_Unity_Android_Game/2.jpg" alt="Фото 2">
+                <img src="LittleStory_Unity_Android_Game/3.jpg" alt="Фото 3">
+                <img src="LittleStory_Unity_Android_Game/4.jpg" alt="Фото 4">
+                <img src="LittleStory_Unity_Android_Game/5.jpg" alt="Фото 5">
+                <img src="LittleStory_Unity_Android_Game/6.jpg" alt="Фото 6">
+                <img src="LittleStory_Unity_Android_Game/7.jpg" alt="Фото 7">
+                <img src="LittleStory_Unity_Android_Game/8.jpg" alt="Фото 8">
+                <img src="LittleStory_Unity_Android_Game/9.jpg" alt="Фото 9">
+                <img src="LittleStory_Unity_Android_Game/10.jpg" alt="Фото 10">
+            </div>
+
+            <div class="tags-title">Використані технології та ресурси:</div>
+            <div class="tags">
+                <div class="tag">Unity</div>
+                <div class="tag">Елементи фізики в Unity</div>
+                <div class="tag">Прості анімації</div>
+                <div class="tag">C#</div>
+                <div class="tag">Aseprite</div>
+                <div class="tag">ChatGPT</div>
+                <div class="tag">YouTube</div>
+                <div class="tag">Документація Unity</div>
+                <div class="tag">Браузерні ресурси</div>
+            </div>
+
+        </section>
+
+        <!--///////////////////PivotBuilder_WinForms///////////////////////-->
+
+        <section class="block">
+            <h2>Програма для автоматичної побудови зведених таблиць</h2>
+
+            <a href="https://github.com/WhoI7/PivotBuilder_WinForms" class="project-link" target="_blank">PivotBuilder_WinForms на GitHub</a>
+            <p><strong> ↑ ↑ ↑ тут у репозиторії <strong>на GitHub</strong> доступні як повний вихідний код проєкту, так і готовий виконуваний файл (.exe).</strong></p>
+
+            <p>
+                Програма написана на C# з використанням Windows Forms.
+                Для роботи з Excel застосовані NuGet-пакети, зокрема для взаємодії з Excel API.
+            </p>
+
+            <p>
+                Розробка програми відбувалась як індивідуальне завдання під час виробничої практики у комунальному некомерційному підприємстві первинної медико-санітарної допомоги Дунаєвецької міської ради.
+                Метою було показати можливості автоматизації та прискорення обробки даних і побудови зведених таблиць.
+            </p>
+
+            <p>
+                Проект є пробним зразком, створеним із використанням безкоштовного функціоналу пакету Aspose.Cells.
+                Через авторські права цей варіант демонструє лише деякі можливості —
+                для повноцінної роботи потрібно придбати повний пакет Aspose.Cells та внести відповідні зміни у код.
+                У демо-версії на створених Excel-файлах завжди додається сторінка із підписом бібліотеки.
+            </p>
+
+            <div class="tags-title">Було реалізовано:</div>
+            <ul>
+                <li>Вибір Excel-файлу для обробки</li>
+                <li>Відкриття файлу та налаштування шаблонів збереження у форматі JSON</li>
+                <li>Вибір необмеженої кількості шаблонів для побудови у вибраному файлі</li>
+                <li>Видалення непотрібних шаблонів</li>
+                <li>Створення окремих шаблонів (хоча програма створювалася не як редактор шаблонів)</li>
+                <li>
+                    Обробка частих помилок, таких як:
+                    <ul>
+                        <li>файл зайнятий іншим процесом</li>
+                        <li>відсутність вибраного файлу</li>
+                        <li>невідповідність вибраних шаблонів до структури вибраної таблиці</li>
+                    </ul>
+                </li>
+                <li>Побудований інтерфейс, схожий на зведені таблиці Excel з урахуванням особливостей бібліотеки Aspose.Cells для уникнення помилок під час роботи</li>
+            </ul>
+
+            <div class="thumbnails">
+                <img src="PivotBuilder_WinForms/1.png" alt="Фото 1">
+                <img src="PivotBuilder_WinForms/2.png" alt="Фото 2">
+                <img src="PivotBuilder_WinForms/3.png" alt="Фото 3">
+                <img src="PivotBuilder_WinForms/4.png" alt="Фото 4">
+                <img src="PivotBuilder_WinForms/5.png" alt="Фото 5">
+                <img src="PivotBuilder_WinForms/6.png" alt="Фото 6">
+                <img src="PivotBuilder_WinForms/7.png" alt="Фото 7">
+                <img src="PivotBuilder_WinForms/8.png" alt="Фото 8">
+                <img src="PivotBuilder_WinForms/9.png" alt="Фото 9">
+                <img src="PivotBuilder_WinForms/10.png" alt="Фото 10">
+                <img src="PivotBuilder_WinForms/11.png" alt="Фото 11">
+                <img src="PivotBuilder_WinForms/12.png" alt="Фото 12">
+                <img src="PivotBuilder_WinForms/13.png" alt="Фото 13">
+                <img src="PivotBuilder_WinForms/14.png" alt="Фото 14">
+                <img src="PivotBuilder_WinForms/15.png" alt="Фото 15">
+                <img src="PivotBuilder_WinForms/16.png" alt="Фото 16">
+            </div>
+
+            <div class="tags-title">Використані технології та ресурси:</div>
+            <div class="tags">
+                <span class="tag">C#</span>
+                <span class="tag">Windows Forms</span>
+                <span class="tag">NuGet</span>
+                <span class="tag">Aspose.Cells (демо-версія)</span>
+                <span class="tag">Excel API</span>
+                <span class="tag">JSON шаблони</span>
+                <span class="tag">Автоматизація зведених таблиць</span>
+                <span class="tag">Обробка помилок</span>
+            </div>
+
+        </section>
+
+
+    </div>
+
+    <div class="overlay" id="overlay">
+      <div class="photo-container">
+        <span class="arrow left" id="prev">&#8592;</span>
+        <img id="fullImage" src="" alt="Full">
+        <span class="arrow right" id="next">&#8594;</span>
+      </div>
+    </div>
+
+<span class="close-btn" id="close">&times;</span>
+
+  <script>
+    const thumbnails = document.querySelectorAll('.thumbnails img');
+    const overlay = document.getElementById('overlay');
+    const fullImage = document.getElementById('fullImage');
+    const closeBtn = document.getElementById('close');
+    const prevBtn = document.getElementById('prev');
+    const nextBtn = document.getElementById('next');
+
+    let currentIndex = 0;
+    const images = Array.from(thumbnails).map(img => img.src.replace('/300/200', '/1200/800'));
+
+    function openOverlay(index) {
+      currentIndex = index;
+      fullImage.src = images[currentIndex];
+      overlay.classList.add('active');
+      closeBtn.style.display = 'block';
+    }
+
+    function closeOverlay() {
+      overlay.classList.remove('active');
+      closeBtn.style.display = 'none';
+    }
+
+    thumbnails.forEach((thumb, index) => {
+      thumb.addEventListener('click', () => openOverlay(index));
+    });
+
+    closeBtn.addEventListener('click', closeOverlay);
+
+    prevBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      fullImage.src = images[currentIndex];
+    });
+
+    nextBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex + 1) % images.length;
+      fullImage.src = images[currentIndex];
+    });
+
+    // Додаємо закриття по Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && overlay.classList.contains('active')) {
+        closeOverlay();
+      }
+    });
+
+    // Сховати хрестик по замовчуванню
+      closeBtn.style.display = 'none';
+
+  </script>
+</body>
+</html>
